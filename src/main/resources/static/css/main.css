@@ -1,3 +1,7 @@
 body {
   padding-top: 56px;
 }
+
+.opaque {
+	background-color: rgba(245, 245, 245, 0.8);
+}
