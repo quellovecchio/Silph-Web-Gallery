@@ -8,10 +8,26 @@ import javax.persistence.Id;
 
 @Entity
 public class Employee {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@Column
+	private String name;
+	@Column
+	private String surname;
+	@Column
+	private String email;
+	@Column
+	private String pwd;
+	
+	public Employee() {
+		id = 0;
+		name = "foo";
+		surname = "bar";
+		email = "foo@bar.it";
+		pwd = "foobar";
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -36,19 +52,17 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPsw() {
-		return psw;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setPsw(String psw) {
-		this.psw = psw;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
-	@Column
-	private String name;
-	@Column
-	private String surname;
-	@Column
-	private String email;
-	@Column
-	private String psw;
+	
+	public boolean isPasswordCorrect(String insertedPsw) {
+		if (pwd.equals(insertedPsw))
+			return true;
+		return false;
+	}
 	
 }

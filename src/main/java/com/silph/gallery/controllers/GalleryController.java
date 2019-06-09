@@ -16,6 +16,7 @@ import com.silph.gallery.model.Employee;
 import com.silph.gallery.services.AlbumService;
 import com.silph.gallery.services.PhotoService;
 import com.silph.gallery.services.PhotographerService;
+import com.silph.gallery.validators.EmployeeValidator;
 
 @Controller
 public class GalleryController {
@@ -26,6 +27,8 @@ public class GalleryController {
 	private AlbumService albumService;
 	@Autowired
 	private PhotographerService photographerService;
+	@Autowired
+	private EmployeeValidator employeeValidator;
 	
     @GetMapping("/")
     public String gallery (Model model) {
@@ -35,16 +38,19 @@ public class GalleryController {
     
     @GetMapping("/login")
     public String login (Model model) {
+    	model.addAttribute("employee", new Employee());
     	return "pages/login.html";
     }
     
     @RequestMapping(value = "/loginEmployee", method = RequestMethod.POST)
-    public String getStudente(@Valid @ModelAttribute("employee") Employee employee, Model model, BindingResult br) {
+    public String loginEmployee(@Valid @ModelAttribute("employee") Employee employee, Model model, BindingResult br) {
     	this.employeeValidator.validate(employee, br);
     	if (!br.hasErrors()) {
     		model.addAttribute("currentEmployee", employee);
     		return "pages/employeeDashboard.html";
     	}
+    	else
+    		return "pages/login.html";
     }
     
     

@@ -28,6 +28,7 @@ public class PhotoService {
 		return (List<Photo>)photoRepository.findAll();
 	}
 
+	// To be rewritten
 	@Transactional
 	public List<Photo> last30Photos() {
 		List<Photo> photos = new ArrayList<Photo>();
