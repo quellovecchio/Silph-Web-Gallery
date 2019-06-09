@@ -29,7 +29,11 @@ public class PhotoService {
 
 	@Transactional
 	public List<Photo> last30Photos() {
-		return new ArrayList<Photo>();
+		List<Photo> photos = new ArrayList<Photo>();
+		Photo p = new Photo();
+		photos.add(p);
+		//System.out.println("In photos there are stored " + photos.size() + " elements");
+		return photos;
 				//(List<Photo>)photoRepository.findLast30();
 	}
 }

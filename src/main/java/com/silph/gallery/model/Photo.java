@@ -16,8 +16,6 @@ public class Photo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(nullable = false)
-	private byte[] image;
-	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false)
 	private LocalDate publicationDate;
@@ -27,17 +25,23 @@ public class Photo {
 	private Photographer photographer;
 	@ManyToOne
 	private Album album;
+	
+	public Photo () {
+		id = 0;
+		name = "alkf";
+		publicationDate = LocalDate.now();
+		imageUrl = "https://source.unsplash.com/pWkk7iiCoDM/400x300";
+		//photographer = new Photographer();
+		//album = new Album();
+	}
+	
+	
+	
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
-	}
-	public byte[] getImage() {
-		return image;
-	}
-	public void setImage(byte[] image) {
-		this.image = image;
 	}
 	public String getName() {
 		return name;

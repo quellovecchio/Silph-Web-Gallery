@@ -1,90 +1,86 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="en" xmlns:th=http://www.thymeleaf.org xmlns="http://www.w3.org/1999/html">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport"
-			  content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="Gallery Web App">
-		<meta name="author" content="Luca Del Vecchio">
+<html lang="en" xmlns:th=http://www.thymeleaf.org
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Gallery Web App">
+<meta name="author" content="Luca Del Vecchio">
 
-		<title>Silph Gallery</title>
+<title>Silph Gallery</title>
 
-		<!-- Bootstrap core CSS -->
-		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-		<!-- Custom styles for this template -->
-		<link href="css/main.css" rel="stylesheet">
-		
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-	</head>
-	
-	<body>
-	
-   		<!-- Navigation -->
-   		<div th:insert="fragments/header :: header" ></div>
-  		
-  		<!-- Header -->
-  		<header class="bg-primary py-5 mb-5">
-    		<div class="container h-100">
-      			<div class="row h-100 align-items-center">
-        			<div class="col-lg-12">
-          				<h3 class="display-4 text-white mt-3 mb-5 text-center">Silph Gallery</h3>
-          				<p class="lead mb-4 text-white-50 text-center"> Search and browse photos from our vast collection. </p>
-          				<!-- Search form -->
-          				<div class="col-lg-8 mx-auto">
+<!-- Custom styles for this template -->
+<link href="css/main.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
+	integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+	crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<div th:insert="fragments/header :: header"></div>
+
+	<!-- Header -->
+	<header class="bg-primary py-5 mb-5">
+		<div class="container h-100">
+			<div class="row h-100 align-items-center">
+				<div class="col-lg-12">
+					<h3 class="display-4 text-white mt-3 mb-5 text-center">Silph
+						Gallery</h3>
+					<p class="lead mb-4 text-white-50 text-center">Search and
+						browse photos from our vast collection.</p>
+					<!-- Search form -->
+					<div class="col-lg-8 mx-auto">
 						<div class="input-group">
-  							<input type="text" class="form-control" aria-label="Text input with dropdown button">
-  							<div class="input-group-append">
-    							<button class="btn btn-outline-secondary dropdown-toggle opaque" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search in...</button>
-    							<div class="dropdown-menu">
-      								<a class="dropdown-item" href="#">Photographers</a>
-      								<a class="dropdown-item" href="#">Albums</a>
-      								<a class="dropdown-item" href="#">Photos</a>
-      								<div role="separator" class="dropdown-divider"></div>
-      								<a class="dropdown-item" href="#">Everything</a>
-    							</div>
-    							</div>
+							<input type="text" class="form-control"
+								aria-label="Text input with dropdown button">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary dropdown-toggle opaque"
+									type="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">Search in...</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="/searchPhotographers">Photographers</a> <a
+										class="dropdown-item" href="/searchAlbums">Albums</a> <a
+										class="dropdown-item" href="/searchPhotos">Photos</a>
+									<div role="separator" class="dropdown-divider"></div>
+									<a class="dropdown-item" href="/searchALl">Everything</a>
+								</div>
+							</div>
 						</div>
 					</div>
-        		</div>
-      		</div>
-      		</div>
-  		</header>
-  		
-  		<!-- Gallery -->
-		<div class="container">
-			<!-- <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Thumbnail Gallery</h1> -->
-			<!--  <hr class="mt-2 mb-5"> -->
-				<div class="row text-center text-lg-center">
-					<div class="col-lg-4 col-md-4 col-6 my-9" th:insert="fragments/photo :: photo">
-					</div>
-    				
-    				<div class="col-lg-4 col-md-4 col-6" th:insert="fragments/photo :: photo">
-    				</div>
-    				<div class="col-lg-4 col-md-4 col-6" th:insert="fragments/photo :: photo">
-    				</div>
-    				<div class="col-lg-4 col-md-4 col-6" th:insert="fragments/photo :: photo"> 
-    				</div>
-    				<div class="col-lg-4 col-md-4 col-6" th:insert="fragments/photo :: photo">
-    				</div>
-    				<div class="col-lg-4 col-md-4 col-6" th:insert="fragments/photo :: photo">
-    				</div>
-    				<div class="col-lg-4 col-md-4 col-6" th:insert="fragments/photo :: photo">
-    				</div>
-    				<div class="col-lg-4 col-md-4 col-6" th:insert="fragments/photo :: photo">
-    				</div>
-    				<div class="col-lg-4 col-md-4 col-6" th:insert="fragments/photo :: photo">
-    				</div>
-    				<div class="col-lg-4 col-md-4 col-6" th:insert="fragments/photo :: photo">
-    				</div>
-    				<div class="col-lg-4 col-md-4 col-6" th:insert="fragments/photo :: photo">
-    				</div>	
-    				<div class="col-lg-4 col-md-4 col-6" th:insert="fragments/photo :: photo">
-    				</div>
 				</div>
 			</div>
-	</body>
-	
+		</div>
+	</header>
+
+	<!-- Gallery -->
+	<div class="container">
+		<!-- <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Thumbnail Gallery</h1> -->
+		<!--  <hr class="mt-2 mb-5"> -->
+		<div th:if="${last30Photos.empty}">
+            <div class="col"> No Photos Available </div>
+        </div>
+		<div class="row text-center text-lg-center" >
+		<div th:each="photo: ${last30Photos}">
+			<div class="col-lg-4 col-md-4 col-6 my-9"
+				th:insert="fragments/photo :: photo"></div>
+		</div>
+		</div>
+	</div>
+</body>
+
 </html>
