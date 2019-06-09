@@ -75,10 +75,19 @@
             <div class="col"> No Photos Available </div>
         </div>
 		<div class="row text-center text-lg-center" >
-		<div th:each="photo: ${last30Photos}">
-			<div class="col-lg-4 col-md-4 col-6 my-9"
-				th:insert="fragments/photo :: photo"></div>
-		</div>
+			<div th:each="photo: ${last30Photos}">
+				<div class="col-lg-3 col-md-3 col-4 my-9">
+    				<a th:href="@{'/photo' + '/' + ${photo.id}}">
+           				<img class="img-fluid img-thumbnail" th:src="${photo.getImageUrl()}">
+          			</a>
+					<a th:href="@{'/photo' + '/' + ${photo.id}}"
+					   th:text="${photo.name}">name of the photo
+					</a> 
+					<a th:href="@{'/photographer' + '/' + ${photo.getPhotographer().getId()}}"
+					   th:text="${photo.getPhotographer().name} + ' ' + ${photo.getPhotographer().surname}">name of the photographer
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
