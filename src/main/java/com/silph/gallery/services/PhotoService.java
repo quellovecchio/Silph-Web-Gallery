@@ -2,6 +2,7 @@ package com.silph.gallery.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -44,5 +45,10 @@ public class PhotoService {
 		System.out.println("In photos there are stored " + photos.size() + " elements");
 		return photos;
 				//(List<Photo>)photoRepository.findLast30();
+	}
+
+	@Transactional
+	public Optional<Photo> getPhotoById(Long id) {
+		return photoRepository.findById(id);
 	}
 }

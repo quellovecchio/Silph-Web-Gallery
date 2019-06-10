@@ -19,15 +19,25 @@ public class Employee {
 	private String email;
 	@Column
 	private String pwd;
+	@Column
+	private String role;
 	
 	public Employee() {
-		id = 0;
 		name = "foo";
 		surname = "bar";
 		email = "foo@bar.it";
 		pwd = "foobar";
+		role = "EMPLOYEE";
 	}
 	
+	public Employee(String name, String surname, String email, String password, String role) {
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.pwd = password;
+		this.role = role;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -58,6 +68,15 @@ public class Employee {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
+	
+	private String getRole() {
+		return role;
+	}
+
+	private void setRole(String role) {
+		this.role = role;
+	}
+
 	
 	public boolean isPasswordCorrect(String insertedPsw) {
 		if (pwd.equals(insertedPsw))

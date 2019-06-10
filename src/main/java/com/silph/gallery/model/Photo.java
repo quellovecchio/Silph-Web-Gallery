@@ -27,15 +27,10 @@ public class Photo {
 	private Album album;
 	
 	public Photo () {
-		id = 0;
-		name = "alkf";
+		name = "Fiera";
 		publicationDate = LocalDate.now();
 		imageUrl = "https://source.unsplash.com/pWkk7iiCoDM/400x300";
-		//photographer = new Photographer();
-		//album = new Album();
 	}
-	
-	
 	
 	public long getId() {
 		return id;
@@ -72,5 +67,16 @@ public class Photo {
 	}
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Photo that = (Photo)obj;
+		return this.id == that.id;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Long.hashCode(this.id);
 	}
 }

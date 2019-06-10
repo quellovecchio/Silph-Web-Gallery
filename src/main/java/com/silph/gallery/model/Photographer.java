@@ -1,5 +1,6 @@
 package com.silph.gallery.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,6 +24,12 @@ public class Photographer {
 	private String name;
 	@Column
 	private String surname;
+
+	public Photographer(String name, String surname) {
+		this.name = name;
+		this.surname = surname;
+		this.albums = new ArrayList<Album>();
+	}
 	
 	public String getSurname() {
 		return surname;
@@ -47,5 +54,9 @@ public class Photographer {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void addAlbum(Album a) {
+		this.albums.add(a);
 	}
 }
