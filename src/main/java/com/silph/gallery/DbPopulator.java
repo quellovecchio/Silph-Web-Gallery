@@ -42,10 +42,11 @@ public class DbPopulator implements ApplicationRunner {
 	private void addAll() {
 		Employee e = new Employee("Luca", "Del Vecchio", "luc.delvecchio@silph.com", "password", "EMPLOYEE");
 		Photographer p = new Photographer("Giorgio", "Vanni");
-		Album a = new Album();
+		Album a = new Album("Prove");
 		Photo ph = new Photo();
 		p.addAlbum(a);
 		a.addPhoto(ph);
+		ph.setPhotographer(p);
 		photograperRepository.save(p);
 		photoRepository.save(ph);
 		albumRepository.save(a);

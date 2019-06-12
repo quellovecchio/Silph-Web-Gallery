@@ -31,6 +31,10 @@ public class Photographer {
 		this.albums = new ArrayList<Album>();
 	}
 	
+	public Photographer() {
+		this.albums = new ArrayList<Album>();
+	}
+	
 	public String getSurname() {
 		return surname;
 	}

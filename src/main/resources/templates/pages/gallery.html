@@ -81,7 +81,7 @@
            				<img class="img-fluid img-thumbnail" th:src="${photo.getImageUrl()}">
           			</a>
 					<a th:href="@{'/photo' + '/' + ${photo.id}}"
-					   th:text="${photo.name}">name of the photo
+					   th:text="${photo.description}">description of the photo
 					</a> 
 					<a th:href="@{'/photographer' + '/' + ${photo.getPhotographer().getId()}}"
 					   th:text="${photo.getPhotographer().name} + ' ' + ${photo.getPhotographer().surname}">name of the photographer

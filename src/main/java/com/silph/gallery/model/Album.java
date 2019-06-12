@@ -29,10 +29,6 @@ public class Album {
 		photos = new ArrayList<Photo>();
 		this.name = name;
 	}
-
-	public Album() {
-
-	}
 	
 	public long getId() {
 		return id;

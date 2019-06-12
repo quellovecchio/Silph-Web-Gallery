@@ -35,8 +35,18 @@
 	<div th:insert="fragments/header :: header"></div>
 
     <!-- Photo -->
-    <img th:src="${photo.getImageUrl()}" class="img-fluid">
-    
+    <div class="container-fluid">
+    	<div class="row border border-primary">
+    		<div class="col-md-8 border border-primary">
+    			<img th:src="${photo.getImageUrl()}" class="img-fluid">
+    		</div>
+    		<div class="col-md-4 border border-primary">
+    		fsdjfhsd
+    			<a th:href="@{'/photographer' + '/' + ${photo.getPhotographer().getId()}}"
+    			   th:text="${photo.getPhotographer().getName()} + ${photo.getPhotographer().getSurname()}" > Name of the photographer </a>
+    		</div>
+    	</div>
+    </div>
 </body>
 
 </html>

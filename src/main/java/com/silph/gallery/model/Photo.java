@@ -16,7 +16,7 @@ public class Photo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(nullable = false)
-	private String name;
+	private String description;
 	@Column(nullable = false)
 	private LocalDate publicationDate;
 	@Column
@@ -27,7 +27,7 @@ public class Photo {
 	private Album album;
 	
 	public Photo () {
-		name = "Fiera";
+		description = "Fiera";
 		publicationDate = LocalDate.now();
 		imageUrl = "https://source.unsplash.com/pWkk7iiCoDM/400x300";
 	}
@@ -38,11 +38,11 @@ public class Photo {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return description;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setDescription(String name) {
+		this.description = name;
 	}
 	public LocalDate getPublicationDate() {
 		return publicationDate;

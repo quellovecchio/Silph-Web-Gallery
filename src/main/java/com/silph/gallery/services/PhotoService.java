@@ -1,6 +1,5 @@
 package com.silph.gallery.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.silph.gallery.model.Photo;
-import com.silph.gallery.model.Photographer;
 import com.silph.gallery.repositories.PhotoRepository;
 
 @Service
@@ -32,19 +30,7 @@ public class PhotoService {
 	// To be rewritten
 	@Transactional
 	public List<Photo> last30Photos() {
-		List<Photo> photos = new ArrayList<Photo>();
-		Photo p = new Photo();
-		Photographer ph = new Photographer();
-		ph.setName("Giuseppe");
-		ph.setSurname("Rossi");
-		ph.setId(457);
-		p.setPhotographer(ph);
-		p.setImageUrl("https://source.unsplash.com/pWkk7iiCoDM/400x300");
-		for (int i=0; i<30; i++)
-			photos.add(p);
-		System.out.println("In photos there are stored " + photos.size() + " elements");
-		return photos;
-				//(List<Photo>)photoRepository.findLast30();
+		return (List<Photo>)photoRepository.findLast30();
 	}
 
 	@Transactional
