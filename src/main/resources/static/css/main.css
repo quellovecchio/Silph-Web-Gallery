@@ -1,4 +1,5 @@
-body {
+html, body {
+	height: 100%;
 }
 
 .opaque {
@@ -20,7 +21,8 @@ body {
 }
 
 header {
-	
-  margin-top: 56px;
-  
+	margin-bottom: 50px;
+}
+
+page {
 }

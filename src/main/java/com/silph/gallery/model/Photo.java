@@ -32,6 +32,12 @@ public class Photo {
 		imageUrl = "https://source.unsplash.com/pWkk7iiCoDM/400x300";
 	}
 	
+	public Photo (String description, String url) {
+		this.description = description;
+		this.publicationDate = LocalDate.now();
+		this.imageUrl = url;
+	}
+	
 	public long getId() {
 		return id;
 	}

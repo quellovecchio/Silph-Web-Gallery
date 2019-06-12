@@ -35,35 +35,26 @@
 	<div class="container-fluid">
 		<header th:insert="fragments/header :: header"></header>
 
-	<!-- Photo -->
-		<page class="container border align-items-center">
+	<!-- Album -->
+		<page class="container align-items-center">
 			<div class="row align-items-center mb-0">
-				<div class="row">
-					<div class="col-md-8">
-						<img th:src="${photo.getImageUrl()}" class="img-fluid">
-					</div>
-					<div class="col-md-4">
-						<ul>
-							<li>
-								<a  th:href="@{'/photo' + '/' + ${photo.getId()}}"
-									th:text="${photo.getDescription()}">
-									Name of the photo 
-								</a>
-							</li>
-							<li>
-								<a  th:href="@{'album' + '/' + ${photo.getAlbum().getId()}}"
-									th:text="${photo.getAlbum().getName()}">
-									Name of the album
-								</a>
-							</li>
-							<li>
-								<a  th:href="@{'/photographer' + '/' + ${photo.getPhotographer().getId()}}"
-									th:text="${photo.getPhotographer().getName()} + ' ' + ${photo.getPhotographer().getSurname()}">
-									Name of the photographer 
-								</a>
-							</li>
-						</ul>
-					</div>
+				<div class="col-8">
+					<a  th:href="@{'/photographer' + '/' + ${photographer.getId()}}"
+						th:text="${photographer.getName()} + ' ' + ${photographer.getSurname()}">
+						Name of the photographer 
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div th:if="${photographer.getAlbums().empty}">
+					Still no albums saved.
+				</div>
+				<div th:each="album: ${photographer.getAlbums()}" class="col-md-2">
+					<img th:src="${album.getPhotos().get(0).getImageUrl()}" class="img-thumbnail">
+					<a th:href="@{'/album' + '/' + ${album.getId()}}"
+					   th:text="${album.getName()}">
+					   Name of the album
+					</a>
 				</div>
 			</div>
 		</page>

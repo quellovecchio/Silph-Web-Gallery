@@ -30,6 +30,10 @@ public class Album {
 		this.name = name;
 	}
 	
+	public Album() {
+		photos = new ArrayList<Photo>();
+	}
+	
 	public long getId() {
 		return id;
 	}
