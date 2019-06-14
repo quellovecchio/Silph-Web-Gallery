@@ -51,7 +51,7 @@
 								</a>
 							</li>
 							<li>
-								<a  th:href="@{'album' + '/' + ${photo.getAlbum().getId()}}"
+								<a  th:href="@{'/album' + '/' + ${photo.getAlbum().getId()}}"
 									th:text="${photo.getAlbum().getName()}">
 									Name of the album
 								</a>
@@ -64,9 +64,24 @@
 							</li>
 						</ul>
 					</div>
+					<div>
+						<form th:action="@{'/addToCart' + '/' +  ${photo.getId()}}" method="POST">
+							<button type="submit">Add to cart</button>
+						</form>
+					</div>
 				</div>
 			</div>
 		</page>
+		<div th:if="${cart.isNotEmpty()}">
+			<div class="footer">
+				<div th:each="photo: ${cart.getPhotos()}">
+					<div class="col-sm-4 col-md-3 col-lg-2">
+						<img th:src="${photo.getImageUrl()}" 
+							 class="img-thumbnail">
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 

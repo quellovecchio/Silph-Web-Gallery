@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.silph.gallery.model.Album;
 
 @Repository
-public interface AlbumRepository extends CrudRepository<Album, UUID> {
+public interface AlbumRepository extends CrudRepository<Album, Long> {
 
 	public List<Album> findByName(String name);
 	

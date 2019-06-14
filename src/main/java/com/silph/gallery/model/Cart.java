@@ -1,30 +1,39 @@
 package com.silph.gallery.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Cart {
 
-	private List<Photo> photos;
+	private Map<Long, Photo> photos;
 
 	public Cart() {
-		photos = new ArrayList<Photo>();
+		photos = new HashMap<Long, Photo>();
 	}
 	
-	public List<Photo> getPhotos() {
+	public Map<Long, Photo> getPhotos() {
 		return photos;
 	}
 
-	public void setPhotos(List<Photo> photos) {
+	public void setPhotos(Map<Long, Photo> photos) {
 		this.photos = photos;
 	}
 	
 	public void addPhoto(Photo photo) {
-		this.photos.add(photo);
+		this.photos.put(photo.getId(), photo);
 	}
 	
 	public void removePhoto(Photo photo) {
-		this.photos.remove(photo);
+		this.photos.remove(photo.getId());
 	}
 	
+	public boolean isNotEmpty() {
+		return !photos.isEmpty();
+	}
+
+	public boolean contains(Photo photo) {
+		return photos.containsKey(photo.getId());
+	}
 }
