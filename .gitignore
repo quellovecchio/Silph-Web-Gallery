@@ -100,4 +100,15 @@ hs_err_pid*
 ## ignoring target file
 target/
 
-# End of https://www.gitignore.io/api/java,eclipse,java-web
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
+# End of https://www.gitignore.io/api/java,eclipse,java-web,visualstudiocode
