@@ -44,21 +44,4 @@ public class PhotoController {
 		else
 			return "pages/error.html";
     }
-    
-    @RequestMapping(value = "/addToCart/{id}", method = RequestMethod.POST) 
-	public String addToCartPhoto(@PathVariable ("id") Long id, @ModelAttribute ("cart") Cart cart, Model model, RedirectAttributes attributes, HttpServletRequest request) {
-		System.out.println("Photo in cart before updating the cart: " + cart.size());
-		Optional<Photo> p = photoService.getPhotoById(id);
-		if (id!=null) {
-			if (cart.contains(p.get())) {
-				System.out.println("Photo in cart already present");
-				return "redirect:" + request.getHeader("Referer");
-			}
-			cart.addPhoto(p.get());
-			attributes.addFlashAttribute("cart", cart);
-			System.out.println("Photo in cart after updating the cart: " + cart.size());
-			return "redirect:" + request.getHeader("Referer");
-		}
-		return "redirect:pages/error.html";
-	} 
 }

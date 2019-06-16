@@ -1,5 +1,7 @@
 package com.silph.gallery.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +18,21 @@ public class UsageRequest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@Column
+	private String clientName;
+	@Column
+	private String clientSurname;
+	@Column
+	private String clientEmail;
+	@OneToMany
+	private List<Photo> chosenPhotos;
+	@Column
+	private String note;
+
+	public UsageRequest() {
+		this.chosenPhotos = new ArrayList<Photo>();
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -46,21 +63,14 @@ public class UsageRequest {
 	public void setChosenPhotos(List<Photo> chosenPhotos) {
 		this.chosenPhotos = chosenPhotos;
 	}
+	public void setChosenPhotos(Collection<Photo> chosenPhotos) {
+		this.chosenPhotos.clear();
+		this.chosenPhotos.addAll(chosenPhotos);
+	}
 	public String getNote() {
 		return note;
 	}
 	public void setNote(String note) {
 		this.note = note;
-	}
-	@Column
-	private String clientName;
-	@Column
-	private String clientSurname;
-	@Column
-	private String clientEmail;
-	@OneToMany
-	private List<Photo> chosenPhotos;
-	@Column
-	private String note;
-	
+	}	
 }
