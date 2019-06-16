@@ -1,8 +1,7 @@
 package com.silph.gallery.model;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Cart {
@@ -15,6 +14,10 @@ public class Cart {
 	
 	public Map<Long, Photo> getPhotos() {
 		return photos;
+	}
+
+	public Collection<Photo> getPhotosAsList() {
+		return photos.values();
 	}
 
 	public void setPhotos(Map<Long, Photo> photos) {
@@ -30,10 +33,14 @@ public class Cart {
 	}
 	
 	public boolean isNotEmpty() {
-		return !photos.isEmpty();
+		return photos.size()>0;
 	}
 
 	public boolean contains(Photo photo) {
 		return photos.containsKey(photo.getId());
+	}
+
+	public int size() {
+		return photos.size();
 	}
 }

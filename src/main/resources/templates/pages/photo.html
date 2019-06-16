@@ -74,10 +74,9 @@
 		</page>
 		<div th:if="${cart.isNotEmpty()}">
 			<div class="footer">
-				<div th:each="photo: ${cart.getPhotos()}">
+				<div th:each="p: ${cart.getPhotosAsList()}">
 					<div class="col-sm-4 col-md-3 col-lg-2">
-						<img th:src="${photo.getImageUrl()}" 
-							 class="img-thumbnail">
+						<img th:src="${p.getImageUrl()}" class="img-thumbnail">
 					</div>
 				</div>
 			</div>
