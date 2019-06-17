@@ -48,7 +48,7 @@
                 </a>
             </div>
         </div>
-        <form action="/confirmCart" method="POST" th:object="${usageRequest}">
+        <form th:action="@{'/confirmCart'}" method="POST" th:object="${usageRequest}">
 			<div>Name:</div>
 			<div><input type="text" th:field="*{clientName}" /></div>
 			<div th:if="${#fields.hasErrors('clientName')}" th:errors="*{clientName}"></div>
@@ -57,7 +57,7 @@
             <div th:if="${#fields.hasErrors('clientSurname')}" th:errors="*{clientSurname}"></div>
             <div>Email:</div>
 			<div><input type="text" th:field="*{clientEmail}" /></div>
-			<div th:if="${#fields.hasErrors('clientEmail')}" th:errors="*{clientEmail}"></div>
+            <div th:if="${#fields.hasErrors('clientEmail')}" th:errors="*{clientEmail}"></div>
             <input type="submit" class="button" value="Confirm"> 
         </form>
     </div>

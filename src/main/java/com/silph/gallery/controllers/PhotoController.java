@@ -2,8 +2,6 @@ package com.silph.gallery.controllers;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.silph.gallery.model.Cart;
 import com.silph.gallery.model.Photo;
 import com.silph.gallery.services.PhotoService;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * PhotoController

@@ -1,7 +1,6 @@
 package com.silph.gallery.repositories;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

@@ -39,9 +39,10 @@ public class CartController {
     }
     
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
-    public String showCartPage(@ModelAttribute ("cart") Cart cart, Model model) {
-        model.addAttribute("usageRequest", new UsageRequest());
+    public String showCartPage(@ModelAttribute ("cart") Cart cart, Model model, RedirectAttributes rAttributes) {
+		model.addAttribute("usageRequest", new UsageRequest());
 		model.addAttribute("cart", cart);
+		rAttributes.addFlashAttribute("cart", cart);
 		return "pages/cart.html";
     }
 
@@ -63,11 +64,15 @@ public class CartController {
     } 
     
     @RequestMapping(value = "/confirmCart", method = RequestMethod.POST) 
-	public String confirmCart(@Valid @ModelAttribute("studente") UsageRequest usageRequest, @ModelAttribute ("cart") Cart cart, Model model, RedirectAttributes attributes, HttpServletRequest request) {
-        usageRequest.setChosenPhotos(cart.getPhotosAsList());
-        usageRequestService.putUsageRequest(usageRequest);
+	public String confirmCart(@Valid @ModelAttribute("usageRequest") UsageRequest usageRequest, @ModelAttribute ("cart") Cart cart, Model model) {
+		UsageRequest uRequest = new UsageRequest();
+		uRequest.setClientEmail(usageRequest.getClientEmail());
+		uRequest.setClientName(usageRequest.getClientName());
+		uRequest.setClientSurname(usageRequest.getClientSurname());
+		uRequest.setChosenPhotos(cart.getPhotosAsList());
+        usageRequestService.putUsageRequest(uRequest);
         model.addAttribute("cart", new Cart());
-		return "redirect:" + request.getHeader("Referer");
+		return "pages/confirmation.html";
 	} 
     
 }
