@@ -3,14 +3,13 @@ package com.silph.gallery.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class UsageRequest {
@@ -24,10 +23,8 @@ public class UsageRequest {
 	private String clientSurname;
 	@Column
 	private String clientEmail;
-	@OneToMany
+	@ManyToMany
 	private List<Photo> chosenPhotos;
-	@Column
-	private String note;
 
 	public UsageRequest() {
 		this.chosenPhotos = new ArrayList<Photo>();
@@ -67,10 +64,4 @@ public class UsageRequest {
 		this.chosenPhotos.clear();
 		this.chosenPhotos.addAll(chosenPhotos);
 	}
-	public String getNote() {
-		return note;
-	}
-	public void setNote(String note) {
-		this.note = note;
-	}	
 }
