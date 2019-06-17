@@ -3,13 +3,11 @@ package com.silph.gallery.controllers;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import com.silph.gallery.model.Cart;
 import com.silph.gallery.model.Photo;
 import com.silph.gallery.model.UsageRequest;
 import com.silph.gallery.services.PhotoService;
-import com.silph.gallery.services.UsageRequestService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +28,6 @@ public class CartController {
 
     @Autowired
     private PhotoService photoService;
-    @Autowired
-    private UsageRequestService usageRequestService;
 
     @ModelAttribute("cart")
 	public Cart cart() {
@@ -63,16 +59,5 @@ public class CartController {
 		return "redirect:pages/error.html";
     } 
     
-    @RequestMapping(value = "/confirmCart", method = RequestMethod.POST) 
-	public String confirmCart(@Valid @ModelAttribute("usageRequest") UsageRequest usageRequest, @ModelAttribute ("cart") Cart cart, Model model) {
-		UsageRequest uRequest = new UsageRequest();
-		uRequest.setClientEmail(usageRequest.getClientEmail());
-		uRequest.setClientName(usageRequest.getClientName());
-		uRequest.setClientSurname(usageRequest.getClientSurname());
-		uRequest.setChosenPhotos(cart.getPhotosAsList());
-        usageRequestService.putUsageRequest(uRequest);
-        model.addAttribute("cart", new Cart());
-		return "pages/confirmation.html";
-	} 
-    
+
 }

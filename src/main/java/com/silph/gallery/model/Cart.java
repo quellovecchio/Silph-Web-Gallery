@@ -36,6 +36,10 @@ public class Cart {
 		return photos.size()>0;
 	}
 
+	public boolean isEmpty() {
+		return photos.isEmpty();
+	}
+
 	public boolean contains(Photo photo) {
 		return photos.containsKey(photo.getId());
 	}
