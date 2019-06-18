@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * AuthConfig
@@ -26,28 +28,41 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 
     private DataSource dataSource;
 
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception { 
             http
             .authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/", "/gallery", "/album", "/photo", "/photographer", "/cart").permitAll()
-            .antMatchers(HttpMethod.GET, "/dashboard").hasAnyAuthority("EMPLOYEE")
+            .antMatchers("/", "/gallery", "/album/**", "/photo/**", "/photographer/**", "/cart", "/addToCart/**", "/confirmCart").permitAll()
+            .antMatchers("/employeeDashboard/**").hasAnyAuthority("EMPLOYEE")
             .and()
             .formLogin()
             .defaultSuccessUrl("/dashboard")
             .and()
             .logout()
             .logoutUrl("/logout")
-            .logoutSuccessUrl("/");
+            .logoutSuccessUrl("/")
+            .and()
+            .csrf()
+            .disable();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { 
-
+        auth.jdbcAuthentication()
+            .dataSource(this.buildDatasource())
+            .authoritiesByUsernameQuery(
+            "SELECT email, role FROM employee WHERE email=?")
+            .usersByUsernameQuery(
+            "SELECT email, password, 1 as enabled FROM users WHERE email=?");
     }
 
     @Bean
-    private DataSource buildDatasource() {  
+    public DataSource buildDatasource() {  
         DataSourceBuilder dataSource = DataSourceBuilder.create();
         dataSource.driverClassName(
         environment.getProperty("spring.datasource.driver-class-name"));
