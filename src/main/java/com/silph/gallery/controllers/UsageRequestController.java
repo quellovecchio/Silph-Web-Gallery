@@ -31,15 +31,17 @@ public class UsageRequestController {
                               @Valid @ModelAttribute("usageRequest") UsageRequest usageRequest,
 							  Model model,
 							  BindingResult bindingResult) {
-
+		System.out.println("Starting procedure of saving a usage request");
 		this.usageRequestValidator.validate(usageRequest, bindingResult);
 
-		if (bindingResult.hasErrors() || cart.isEmpty()) {
+		if (bindingResult.hasErrors() || cart.isNotEmpty()) {
+			System.out.println("Validation didn't pass");
             model.addAttribute("cart", cart);
             return "pages/cart.html";
 		}
 
 		else {
+			System.out.println("Validation passed");
 			UsageRequest uRequest = new UsageRequest();
 			uRequest.setClientEmail(usageRequest.getClientEmail());
 			uRequest.setClientName(usageRequest.getClientName());
@@ -47,6 +49,7 @@ public class UsageRequestController {
 			uRequest.setChosenPhotos(cart.getPhotosAsList());
 			usageRequestService.putUsageRequest(uRequest);
 			model.addAttribute("cart", new Cart());
+			System.out.println("Done");
 			return "pages/confirmation.html";	
 		}
 	} 
