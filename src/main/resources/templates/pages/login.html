@@ -1,58 +1,64 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="en" xmlns:th=http://www.thymeleaf.org
-	xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Gallery Web App">
-<meta name="author" content="Luca Del Vecchio">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Gallery Web App">
+    <meta name="author" content="Luca Del Vecchio">
 
-<title>Silph Gallery</title>
+    <title>Silph Gallery</title>
 
-<!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="css/main.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/main.css" rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
 
 <body class="bg-primary">
-    <div id="login" >
+    <div id="login">
         <h3 class="text-center text-white pt-5 display-4">Silph Gallery</h3>
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" th:action="@{/loginEmployee}" method="post" th:object="${employee}">
+                        <form id="login-form" class="form" th:action="@{/login}" method="POST">
                             <h3 class="text-center text-info">Login</h3>
+                            <div th:if="${param.error}" class="alert alert-error">    
+                                Invalid username or password.
+                            </div>
+                            <div th:if="${param.logout}" class="alert alert-success"> 
+                                You have been logged out.
+                            </div>
                             <div class="form-group">
                                 <label for="email" class="text-info">Email:</label><br>
-                                <input type="text" th:field="*{email}" class="form-control">
+                                <input type="text" id="email" name="email" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="pwd" class="text-info">Password:</label><br>
-                                <input type="text" th:field="*{pwd}" class="form-control">
+                                <input type="password" id="pwd" name="pwd" class="form-control">
                             </div>
                             <div class="form-group text-center mt-5">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
                             </div>
                         </form>
-                        <!-- <div class="text-center text-info text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-                        <div class="text-center text-info text-danger" th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}"></div>  -->
+                        <!--<div class="text-center text-info text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                        <div class="text-center text-info text-danger" th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}"></div> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
+</html>

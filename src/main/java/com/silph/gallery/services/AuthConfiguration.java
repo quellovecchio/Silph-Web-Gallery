@@ -35,20 +35,17 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception { 
-            http
-            .authorizeRequests()
-            .antMatchers("/", "/gallery", "/album/**", "/photo/**", "/photographer/**", "/cart", "/addToCart/**", "/confirmCart").permitAll()
-            .antMatchers("/employeeDashboard/**").hasAnyAuthority("EMPLOYEE")
-            .and()
-            .formLogin()
-            .defaultSuccessUrl("/dashboard")
-            .and()
-            .logout()
-            .logoutUrl("/logout")
-            .logoutSuccessUrl("/")
-            .and()
-            .csrf()
-            .disable();
+        http
+        .authorizeRequests()
+        .antMatchers(HttpMethod.GET, "/employeeDashboard").hasAnyAuthority("EMPLOYEE")
+        .anyRequest().permitAll()
+        .and()
+        .formLogin()
+        .defaultSuccessUrl("/employeeDashboard")
+        .and()
+        .logout()
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/");
     }
 
     @Autowired
@@ -58,18 +55,17 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
             .authoritiesByUsernameQuery(
             "SELECT email, role FROM employee WHERE email=?")
             .usersByUsernameQuery(
-            "SELECT email, password, 1 as enabled FROM users WHERE email=?");
+            "SELECT email, pwd, 1 as enabled FROM employee WHERE email=?");
     }
 
     @Bean
     public DataSource buildDatasource() {  
-        DataSourceBuilder dataSource = DataSourceBuilder.create();
-        dataSource.driverClassName(
-        environment.getProperty("spring.datasource.driver-class-name"));
-        dataSource.url(environment.getProperty("spring.datasource.url"));
-        dataSource.username(environment.getProperty("spring.datasource.username"));
-        dataSource.password(environment.getProperty("spring.datasource.password"));
-        return dataSource.build();
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(environment.getProperty("spring.datasource.driver-class-name"));
+        dataSource.setUrl(environment.getProperty("spring.datasource.url"));
+        dataSource.setUsername(environment.getProperty("spring.datasource.username"));
+        dataSource.setPassword(environment.getProperty("spring.datasource.password"));
+        return dataSource;
     }
     
 }

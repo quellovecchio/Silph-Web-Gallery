@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.silph.gallery.model.Album;
 import com.silph.gallery.model.Employee;
@@ -40,7 +41,9 @@ public class DbPopulator implements ApplicationRunner {
 	}
 
 	private void addAll() {
-		Employee e = new Employee("Luca", "Del Vecchio", "luc.delvecchio@silph.com", "password", "EMPLOYEE");
+		Employee e = new Employee("Luca", "Del Vecchio", "luc.delvecchio@silph.com", null, "EMPLOYEE");
+		String guestPassword = new BCryptPasswordEncoder().encode("password");
+        e.setPwd(guestPassword);
 		Photo ph = new Photo("Allora come va", "https://source.unsplash.com/pWkk7iiCoDM/400x300");
 		Photo ph2 = new Photo("Tutto bene grazie", "https://images.unsplash.com/photo-1560329649-c952ee843f92?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
 		Album a = new Album("Prove");
