@@ -1,0 +1,122 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Gallery Web App">
+    <meta name="author" content="Luca Del Vecchio">
+
+    <title>Silph Gallery</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/main.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
+        integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <div th:insert="fragments/header :: header"></div>
+
+    <!-- Header -->
+    <header class="bg-primary py-5 mb-5">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-lg-12">
+                    <h3 class="display-4 text-white mt-3 mb-5 text-center">Silph
+                        Gallery</h3>
+                    <p class="lead mb-4 text-white-50 text-center">Search and
+                        browse photos from our vast collection.</p>
+                    <!-- Search form -->
+                    <div class="col-lg-8 mx-auto">
+                        <div class="input-group">
+                            <input type="text" class="form-control" th:value="*{search}"
+                                aria-label="Text input with dropdown button">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary dropdown-toggle opaque" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search
+                                    in...</button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/searchPhotographers">Photographers</a> <a
+                                        class="dropdown-item" href="/searchAlbums">Albums</a> <a class="dropdown-item"
+                                        href="/searchPhotos">Photos</a>
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/searchAll">Everything</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search results -->
+    <div class="container photo-page">
+        <!-- <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Thumbnail Gallery</h1> -->
+        <!--  <hr class="mt-2 mb-5"> -->
+        <div th:if="${!photos.empty}">
+        <div class="mt-5 p-5">
+            <h3>Search results</h3>
+        </div>
+            <div class="p-5">
+                <h5>Photos</h5>
+            </div>
+            <div class="row text-center text-lg-center">
+                <div th:each="photo: ${photos}">
+                    <span class="col-lg-3 col-md-4 col-sm-12">
+                        <a th:href="@{'/photo' + '/' + ${photo.id}}">
+                            <img class="img-fluid img-thumbnail" th:src="${photo.getImageUrl()}">
+                        </a>
+                        <a th:href="@{'/photo' + '/' + ${photo.id}}" th:text="${photo.description}">description of the
+                            photo
+                        </a>
+                        <a th:href="@{'/photographer' + '/' + ${photo.getPhotographer().getId()}}"
+                            th:text="${photo.getPhotographer().name} + ' ' + ${photo.getPhotographer().surname}">name of
+                            the
+                            photographer
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div th:if="${!albums.empty}">
+            <div class="p-5">
+                <h5>Albums</h5>
+            </div>
+            <div th:each="album: ${albums}" class="col-md-2">
+                <img th:if="${album.isNotEmpty()}" th:src="${album.getPhotos().get(0).getImageUrl()}"
+                    class="img-thumbnail">
+                <a th:href="@{'/album' + '/' + ${album.getId()}}" th:text="${album.getName()}">
+                    Name of the album
+                </a>
+            </div>
+        </div>
+        <div th:if="${!photographers.empty}">
+            <div class="p-5">
+                <h5>Photographers</h5>
+            </div>
+            <div th:each="photographer: ${photographers}" class="col-md-2">
+                <a th:href="@{'/photographer' + '/' + ${photographer.getId()}}"
+                    th:text="@{${photographer.getName()} + ' ' + ${photographer.getSurname()}}">
+                    Name of the photographer
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

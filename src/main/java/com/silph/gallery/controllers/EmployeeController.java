@@ -9,7 +9,6 @@ import com.silph.gallery.services.AlbumService;
 import com.silph.gallery.services.PhotoService;
 import com.silph.gallery.services.PhotographerService;
 import com.silph.gallery.services.UsageRequestService;
-import com.silph.gallery.validators.EmployeeValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

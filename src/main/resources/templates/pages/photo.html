@@ -1,32 +1,29 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Gallery Web App">
-<meta name="author" content="Luca Del Vecchio">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Gallery Web App">
+	<meta name="author" content="Luca Del Vecchio">
 
-<title>Silph Gallery</title>
+	<title>Silph Gallery</title>
 
-<!-- Bootstrap core CSS -->
-<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap core CSS -->
+	<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="/css/main.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="/css/main.css" rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
-	integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
-	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
+		integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+		crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -35,7 +32,7 @@
 	<div class="container-fluid">
 		<header th:insert="fragments/header :: header"></header>
 
-	<!-- Photo -->
+		<!-- Photo -->
 		<page class="container border align-items-center">
 			<div class="row align-items-center mb-0">
 				<div class="row">
@@ -45,21 +42,20 @@
 					<div class="col-md-4">
 						<ul>
 							<li>
-								<a  th:href="@{'/photo' + '/' + ${photo.getId()}}"
-									th:text="${photo.getDescription()}">
-									Name of the photo 
+								<a th:href="@{'/photo' + '/' + ${photo.getId()}}" th:text="${photo.getDescription()}">
+									Name of the photo
 								</a>
 							</li>
 							<li>
-								<a  th:href="@{'/album' + '/' + ${photo.getAlbum().getId()}}"
+								<a th:href="@{'/album' + '/' + ${photo.getAlbum().getId()}}"
 									th:text="${photo.getAlbum().getName()}">
 									Name of the album
 								</a>
 							</li>
 							<li>
-								<a  th:href="@{'/photographer' + '/' + ${photo.getPhotographer().getId()}}"
+								<a th:href="@{'/photographer' + '/' + ${photo.getPhotographer().getId()}}"
 									th:text="${photo.getPhotographer().getName()} + ' ' + ${photo.getPhotographer().getSurname()}">
-									Name of the photographer 
+									Name of the photographer
 								</a>
 							</li>
 						</ul>
@@ -73,6 +69,10 @@
 			</div>
 		</page>
 		<div th:if="${cart.isNotEmpty()}">
+			<div class="p-5">
+				<h3>Cart</h3>
+			</div>
+
 			<div class="footer">
 				<div th:each="p: ${cart.getPhotosAsList()}">
 					<div class="col-sm-4 col-md-3 col-lg-2">

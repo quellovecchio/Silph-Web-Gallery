@@ -38,6 +38,7 @@
         <div class="mt-5 p-5"><h5>Add photo</h5>
 			<form action="/employeeDashboard/addPhotoAction" method="POST" th:object="${photo}">
 				Name: <input type="text" th:field="*{description}">
+				Url: <input type="text" th:field="*{imageUrl}">
                 <select th:field="*{album.id}">
                     <option th:each="album : ${albums}" th:value="${album.id}" th:text="@{${album.name}}"></option>
 				</select>

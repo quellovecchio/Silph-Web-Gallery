@@ -15,7 +15,6 @@ import com.silph.gallery.repositories.PhotographerRepository;
 @Service
 public class PhotographerService {
 
-
 	@Autowired
 	private PhotographerRepository photographerRepository;
 	
@@ -35,6 +34,12 @@ public class PhotographerService {
 		Iterator<Photographer> i = photographerRepository.findAll().iterator();
 		i.forEachRemaining(list::add);
 		return list;
+	}
+
+	@Transactional
+	public List<Photographer> searchByString(String search) {
+		List<Photographer> r = photographerRepository.findByString(search);
+		return r;
 	}
 
 }
