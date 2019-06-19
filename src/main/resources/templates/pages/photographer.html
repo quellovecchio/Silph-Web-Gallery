@@ -50,7 +50,7 @@
 					Still no albums saved.
 				</div>
 				<div th:each="album: ${photographer.getAlbums()}" class="col-md-2">
-					<img th:src="${album.getPhotos().get(0).getImageUrl()}" class="img-thumbnail">
+					<img th:if="${album.isNotEmpty()}" th:src="${album.getPhotos().get(0).getImageUrl()}" class="img-thumbnail">
 					<a th:href="@{'/album' + '/' + ${album.getId()}}"
 					   th:text="${album.getName()}">
 					   Name of the album

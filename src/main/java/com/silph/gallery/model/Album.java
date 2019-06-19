@@ -61,4 +61,8 @@ public class Album {
 	public void addPhoto(Photo p) {
 		photos.add(p);
 	}
+
+	public boolean isNotEmpty(){
+		return this.photos.size()>0;
+	}
 }

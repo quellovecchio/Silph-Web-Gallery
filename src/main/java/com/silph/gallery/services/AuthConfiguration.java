@@ -37,7 +37,8 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception { 
         http
         .authorizeRequests()
-        .antMatchers(HttpMethod.GET, "/employeeDashboard").hasAnyAuthority("EMPLOYEE")
+        .antMatchers(HttpMethod.POST, "/employeeDashboard/**").hasAnyAuthority("EMPLOYEE")
+        .antMatchers(HttpMethod.GET, "/employeeDashboard/**").hasAnyAuthority("EMPLOYEE")
         .anyRequest().permitAll()
         .and()
         .formLogin()
@@ -45,7 +46,9 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
         .and()
         .logout()
         .logoutUrl("/logout")
-        .logoutSuccessUrl("/");
+        .logoutSuccessUrl("/")
+        .and()
+        .csrf().disable();
     }
 
     @Autowired

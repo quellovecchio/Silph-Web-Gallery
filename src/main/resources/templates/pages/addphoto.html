@@ -11,10 +11,10 @@
 <title>Silph Gallery</title>
 
 <!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="css/main.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -30,20 +30,24 @@
 </head>
 
 <body>
-	<div class="container-fluid">
-		<!-- Navigation -->
-		<div th:insert="fragments/header :: header"></div>
-		<!-- Actions -->
-		<div class="p-5 mt-5">
-			<a href="/employeeDashboard/addPhotographer" class="btn btn-info btn-lg" role="button">Add photographer</a>
-			<a href="/employeeDashboard/addAlbum" class="btn btn-info btn-lg" role="button">Add album</a>
-			<a href="/employeeDashboard/addPhoto" class="btn btn-info btn-lg" role="button">Add photo</a>
-			<a href="/employeeDashboard/checkUsageRequests" class="btn btn-info btn-lg" role="button">Check Usage Requests</a>
-		</div>
-		<div class="p-5 mt-5">
-			<a class="btn-danger btn-info btn-lg" href="/logout" role="button">Logout</a>
-		</div>
-	</div>
+    <div class="container-fluid">
+	    <!-- Navigation -->
+	    <div th:insert="fragments/header :: header"></div>
+
+        <!-- Add album -->
+        <div class="mt-5 p-5"><h5>Add photo</h5>
+			<form action="/employeeDashboard/addPhotoAction" method="POST" th:object="${photo}">
+				Name: <input type="text" th:field="*{description}">
+                <select th:field="*{album.id}">
+                    <option th:each="album : ${albums}" th:value="${album.id}" th:text="@{${album.name}}"></option>
+				</select>
+				<select th:field="*{photographer.id}">
+						<option th:each="photographer: ${photographers}" th:value="${photographer.id}" th:text="@{${photographer.name} + ' ' + ${photographer.surname}}"></option>
+				</select>
+                <input type="submit" class="button" value="Choose photographer"> 
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

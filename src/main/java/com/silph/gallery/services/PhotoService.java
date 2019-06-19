@@ -27,7 +27,6 @@ public class PhotoService {
 		return (List<Photo>)photoRepository.findAll();
 	}
 
-	// To be rewritten
 	@Transactional
 	public List<Photo> last30Photos() {
 		return (List<Photo>)photoRepository.findLast30();
@@ -36,5 +35,10 @@ public class PhotoService {
 	@Transactional
 	public Optional<Photo> getPhotoById(Long id) {
 		return photoRepository.findById(id);
+	}
+
+	@Transactional
+	public void addPhoto(Photo photo) {
+		photoRepository.save(photo);
 	}
 }

@@ -11,10 +11,10 @@
 <title>Silph Gallery</title>
 
 <!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="css/main.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -30,20 +30,20 @@
 </head>
 
 <body>
-	<div class="container-fluid">
-		<!-- Navigation -->
-		<div th:insert="fragments/header :: header"></div>
-		<!-- Actions -->
-		<div class="p-5 mt-5">
-			<a href="/employeeDashboard/addPhotographer" class="btn btn-info btn-lg" role="button">Add photographer</a>
-			<a href="/employeeDashboard/addAlbum" class="btn btn-info btn-lg" role="button">Add album</a>
-			<a href="/employeeDashboard/addPhoto" class="btn btn-info btn-lg" role="button">Add photo</a>
-			<a href="/employeeDashboard/checkUsageRequests" class="btn btn-info btn-lg" role="button">Check Usage Requests</a>
-		</div>
-		<div class="p-5 mt-5">
-			<a class="btn-danger btn-info btn-lg" href="/logout" role="button">Logout</a>
-		</div>
-	</div>
+    <div class="container-fluid">
+	    <!-- Navigation -->
+	    <div th:insert="fragments/header :: header"></div>
+
+        <!-- Usage Requests -->
+        <div th:each="usageRequest: ${usageRequestList}">
+            <div class="col-sm-12 col-md-4 col-lg-3 mt-5 p-5">
+                <h5><div th:text="@{'Usage request n. ' + ${usageRequest.id}}"></div></h5>
+                <a th:text="${usageRequest.getClientName()} + ' ' + ${usageRequest.getClientSurname()}"
+                   th:href="@{'/employeeDashboard' + '/' + 'usageRequest' + '/' + ${usageRequest.id}}"> Link to the ur and generalities of the client
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

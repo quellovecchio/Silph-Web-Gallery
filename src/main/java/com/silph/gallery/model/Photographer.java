@@ -62,4 +62,15 @@ public class Photographer {
 	public void addAlbum(Album a) {
 		this.albums.add(a);
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Photographer that = (Photographer)obj;
+		return (this.id==that.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Math.toIntExact(this.id);
+	}
 }

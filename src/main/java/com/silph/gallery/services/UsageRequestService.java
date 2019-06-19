@@ -3,6 +3,7 @@ package com.silph.gallery.services;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.transaction.Transactional;
 
@@ -32,6 +33,21 @@ public class UsageRequestService {
 		Iterator<UsageRequest> i = usageRequestRepository.findAll().iterator();
 		i.forEachRemaining(list::add);
 		return list;
+	}
+
+	@Transactional
+	public UsageRequest getUsageRequestById(Long id) {
+		try {
+			return usageRequestRepository.findById(id).get();
+		}
+		catch (NoSuchElementException ex) {
+			return null;
+		}
+	}
+
+	@Transactional
+	public void deleteUsageRequestById(Long id) {
+		usageRequestRepository.deleteById(id);
 	}
     
 }

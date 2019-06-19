@@ -30,6 +30,13 @@ public class UsageRequest {
 		this.chosenPhotos = new ArrayList<Photo>();
 	}
 
+	public UsageRequest(String name, String surname, String email) {
+		this.clientEmail = email;
+		this.clientName = name;
+		this.clientSurname = surname;
+		this.chosenPhotos = new ArrayList<Photo>();
+	}
+
 	public long getId() {
 		return id;
 	}
