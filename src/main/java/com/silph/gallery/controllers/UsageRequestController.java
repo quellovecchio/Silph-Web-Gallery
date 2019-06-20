@@ -1,5 +1,6 @@
 package com.silph.gallery.controllers;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.silph.gallery.model.Cart;
@@ -27,14 +28,15 @@ public class UsageRequestController {
     private UsageRequestValidator usageRequestValidator;
 
     @RequestMapping(value = "/confirmCart", method = RequestMethod.POST) 
-	public String confirmCart(@ModelAttribute ("cart") Cart cart,
-                              @Valid @ModelAttribute("usageRequest") UsageRequest usageRequest,
+	public String confirmCart(@Valid @ModelAttribute("usageRequest") UsageRequest usageRequest,
 							  Model model,
+							  HttpSession session,
 							  BindingResult bindingResult) {
 		System.out.println("Starting procedure of saving a usage request");
+		Cart cart = (Cart)session.getAttribute("cart");
+		System.out.println("---------------------------"+cart.size()+"--------------------------");
 		this.usageRequestValidator.validate(usageRequest, bindingResult);
-
-		if (bindingResult.hasErrors() || cart.isNotEmpty()) {
+		if (bindingResult.hasErrors() || cart.isEmpty()) {
 			System.out.println("Validation didn't pass");
             model.addAttribute("cart", cart);
             return "pages/cart.html";

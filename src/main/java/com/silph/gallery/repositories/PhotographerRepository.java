@@ -12,7 +12,7 @@ import com.silph.gallery.model.Photographer;
 @Repository
 public interface PhotographerRepository extends CrudRepository<Photographer, Long> {
 
-	@Query("FROM Photographer WHERE name LIKE :search OR surname LIKE :search")
+	@Query(value = "SELECT * FROM photographer WHERE LOWER(name) LIKE CONCAT('%',:search,'%') OR LOWER(surname) LIKE CONCAT('%',:search,'%')", nativeQuery = true)
 	public List<Photographer> findByString(@Param("search") String search);
 
 	public List<Photographer> findByName(String name);

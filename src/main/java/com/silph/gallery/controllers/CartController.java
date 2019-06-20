@@ -3,6 +3,7 @@ package com.silph.gallery.controllers;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.silph.gallery.model.Cart;
 import com.silph.gallery.model.Photo;
@@ -35,10 +36,11 @@ public class CartController {
     }
     
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
-    public String showCartPage(@ModelAttribute ("cart") Cart cart, Model model, RedirectAttributes rAttributes) {
+    public String showCartPage(@ModelAttribute ("cart") Cart cart, Model model, HttpSession session) {
 		model.addAttribute("usageRequest", new UsageRequest());
 		model.addAttribute("cart", cart);
-		rAttributes.addFlashAttribute("cart", cart);
+		System.out.println("---------------------------"+cart.size()+"--------------------------");
+		session.setAttribute("cart", cart);
 		return "pages/cart.html";
     }
 

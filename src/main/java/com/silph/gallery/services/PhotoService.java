@@ -41,4 +41,9 @@ public class PhotoService {
 	public void addPhoto(Photo photo) {
 		photoRepository.save(photo);
 	}
+
+	public Object searchByString(String search) {
+		List<Photo> r = photoRepository.findByString(search);
+        return r;
+	}
 }

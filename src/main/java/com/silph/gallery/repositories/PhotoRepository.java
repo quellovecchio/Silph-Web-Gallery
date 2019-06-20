@@ -15,5 +15,8 @@ public interface PhotoRepository extends CrudRepository<Photo, Long> {
 	public List<Photo> findLast30();
 	
 	public List<Photo> findByDescription(String name);
+
+	@Query(value = "SELECT * FROM photo WHERE LOWER(description) LIKE CONCAT('%',:search,'%')", nativeQuery = true)
+	public List<Photo> findByString(String search);
 	
 }

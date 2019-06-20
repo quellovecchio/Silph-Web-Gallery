@@ -35,7 +35,7 @@
 	    <div th:insert="fragments/header :: header"></div>
 
         <!-- Cart -->
-        <div th:each="photo: ${cart.getPhotosAsList()}">
+        <div th:each="photo: ${cart.getPhotosAsList()}" class="mt-5 p-5">
             <div class="col-sm-12 col-md-4 col-lg-3">
                 <a th:href="@{'/photo' + '/' + ${photo.id}}">
                        <img class="img-fluid img-thumbnail" th:src="${photo.getImageUrl()}">
@@ -48,7 +48,8 @@
                 </a>
             </div>
         </div>
-        <form th:action="@{'/confirmCart'}" method="POST" th:object="${usageRequest}">
+        <form th:action="@{'/confirmCart'}" method="POST" th:object="${usageRequest}" class="p-5 mt-5">
+            <div ></div>
 			<div>Name:</div>
 			<div><input type="text" th:field="*{clientName}" /></div>
 			<div th:if="${#fields.hasErrors('clientName')}" th:errors="*{clientName}"></div>

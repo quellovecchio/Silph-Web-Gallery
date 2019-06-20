@@ -42,4 +42,9 @@ public class AlbumService {
         return albumRepository.findById(id).get();
 	}
 
+	public Object searchByString(String search) {
+        List<Album> r = albumRepository.findByString(search);
+        return r;
+	}
+
 }

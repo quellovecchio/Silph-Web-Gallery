@@ -35,29 +35,35 @@ public class SearchController {
     @Autowired
     private AlbumService albumService;
 
-    @RequestMapping(value = "/searchAll", method = RequestMethod.GET)
-    public String searchAll (Model model, @RequestParam(name = "search") String search) {
-    model.addAttribute("photographer", new Photographer());
-    return "pages/searchresults.html";
-    }
-
-    @RequestMapping(value = "/searchPhotos", method = RequestMethod.GET)
-    public String searchPhoto (Model model, @RequestParam(name = "search") String search) {
-    return "pages/searchresults.html";
-    }
-
-    @RequestMapping(value = "/searchPhotographers", method = RequestMethod.GET)
-    public String searchPhotographer (Model model, @ModelAttribute(name = "searchWrapper") SearchWrapper search) {
-    model.addAttribute("photographers", photographerService.searchByString(search.getSearch()));
-    model.addAttribute("albums", new ArrayList<Album>());
-    model.addAttribute("photos", new ArrayList<Photo>());
-    return "pages/searchresults.html";
-    }
-
-    @RequestMapping(value = "/searchAlbums", method = RequestMethod.GET)
-    public String searchAlbum (Model model, @RequestParam(name = "search") String search) {
-    model.addAttribute("photographer", new Photographer());
-    return "pages/searchresults.html";
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String searchAll (Model model, @ModelAttribute(name = "search") SearchWrapper search) {
+        System.out.println("--------------------------------------------"+search.getSearch()+"----------------------------------------------------");
+        System.out.println("--------------------------------------------"+search.getType()+"----------------------------------------------------");
+        // search all
+        if(search.getType() == 0) {
+            model.addAttribute("photos", photoService.searchByString(search.getSearch()));
+            model.addAttribute("albums", albumService.searchByString(search.getSearch()));
+            model.addAttribute("photographers", photographerService.searchByString(search.getSearch()));
+        }
+        // search photos
+        if(search.getType() == 1) {
+            model.addAttribute("photos", photoService.searchByString(search.getSearch()));
+            model.addAttribute("albums", new ArrayList<Album>());
+            model.addAttribute("photographers", new ArrayList<Photographer>());
+        }
+        // search albums
+        if(search.getType() == 2) {
+            model.addAttribute("photos", new ArrayList<Photo>());
+            model.addAttribute("albums", albumService.searchByString(search.getSearch()));
+            model.addAttribute("photographers", new ArrayList<Photographer>());
+        }
+        // search photographers
+        if(search.getType() == 3) {
+            model.addAttribute("photos", new ArrayList<Photo>());
+            model.addAttribute("albums", new ArrayList<Album>());
+            model.addAttribute("photographers", photographerService.searchByString(search.getSearch()));
+        }
+        return "pages/searchresults.html";
     }
     
 }

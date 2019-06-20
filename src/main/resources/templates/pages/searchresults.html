@@ -31,47 +31,12 @@
     <!-- Navigation -->
     <div th:insert="fragments/header :: header"></div>
 
-    <!-- Header -->
-    <header class="bg-primary py-5 mb-5">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-lg-12">
-                    <h3 class="display-4 text-white mt-3 mb-5 text-center">Silph
-                        Gallery</h3>
-                    <p class="lead mb-4 text-white-50 text-center">Search and
-                        browse photos from our vast collection.</p>
-                    <!-- Search form -->
-                    <div class="col-lg-8 mx-auto">
-                        <div class="input-group">
-                            <input type="text" class="form-control" th:value="*{search}"
-                                aria-label="Text input with dropdown button">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary dropdown-toggle opaque" type="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search
-                                    in...</button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/searchPhotographers">Photographers</a> <a
-                                        class="dropdown-item" href="/searchAlbums">Albums</a> <a class="dropdown-item"
-                                        href="/searchPhotos">Photos</a>
-                                    <div role="separator" class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="/searchAll">Everything</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
     <!-- Search results -->
     <div class="container photo-page">
-        <!-- <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Thumbnail Gallery</h1> -->
-        <!--  <hr class="mt-2 mb-5"> -->
-        <div th:if="${!photos.empty}">
         <div class="mt-5 p-5">
             <h3>Search results</h3>
         </div>
+        <div th:if="${!photos.empty}">
             <div class="p-5">
                 <h5>Photos</h5>
             </div>

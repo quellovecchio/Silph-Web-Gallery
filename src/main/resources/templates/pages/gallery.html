@@ -43,21 +43,15 @@
 					<!-- Search form -->
 					<div class="col-lg-8 mx-auto">
 						<div class="input-group">
-							<form th:object="${searchWrapper}">
-								<input type="text" class="form-control" th:value="*{search}"
-									aria-label="Text input with dropdown button">
-								<div class="input-group-append">
-									<button class="btn btn-outline-secondary dropdown-toggle opaque" type="button"
-										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search
-										in...</button>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="/searchPhotographers">Photographers</a> <a
-											class="dropdown-item" href="/searchAlbums">Albums</a> <a
-											class="dropdown-item" href="/searchPhotos">Photos</a>
-										<div role="separator" class="dropdown-divider"></div>
-										<a class="dropdown-item" href="/searchAll">Everything</a>
-									</div>
-								</div>
+							<form th:object="${searchWrapper}" th:action="@{/search}" method="POST">
+								<input type="text" class="form-control" th:field="*{search}">
+								in <select th:field="*{type}">
+									<option th:value="${0}">All</option>
+									<option th:value="${1}">Photos</option>
+									<option th:value="${2}">Albums</option>
+									<option th:value="${3}">Photographers</option>
+								</select>
+								<button class="btn-info" type="submit"> Search </button>
 							</form>
 						</div>
 					</div>
@@ -90,11 +84,15 @@
 		</div>
 		<div th:if="${cart.isNotEmpty()}">
 			<div class="footer">
-				<div th:each="p: ${cart.getPhotosAsList()}">
-					<div class="col-sm-4 col-md-3 col-lg-2">
+				<div class="p-5">
+					<h3>Cart</h3>
+				</div>
+				<div >
+					<div class="col-sm-4 col-md-3 col-lg-2" th:each="p: ${cart.getPhotosAsList()}">
 						<img th:src="${p.getImageUrl()}" class="img-thumbnail">
 					</div>
 				</div>
+				<a href="/cart" class="btn-success btn-lg p-2">Confirm cart</a>
 			</div>
 		</div>
 	</div>
