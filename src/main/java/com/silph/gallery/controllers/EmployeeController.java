@@ -98,6 +98,7 @@ public class EmployeeController {
     model.addAttribute("photo", new Photo());
     model.addAttribute("albums", albumService.getAllAlbums());
     model.addAttribute("photographers", photographerService.getAllPhotographers());
+    model.addAttribute("stringToVisualize", "");
     return "pages/addphoto.html";
   }
 
@@ -107,8 +108,13 @@ public class EmployeeController {
       photoService.addPhoto(photo);
       return "redirect:/employeeDashboard";
     }
-    else
-      return "redirect:/addPhoto";
+    else {
+      model.addAttribute("stringToVisualize", "The album is not by the photographer who owns it");
+      model.addAttribute("photo", new Photo());
+      model.addAttribute("albums", albumService.getAllAlbums());
+      model.addAttribute("photographers", photographerService.getAllPhotographers());
+      return "pages/addphoto.html";
+    }
   }
     
 }

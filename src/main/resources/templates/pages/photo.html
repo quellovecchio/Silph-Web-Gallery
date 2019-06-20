@@ -33,51 +33,58 @@
 		<header th:insert="fragments/header :: header"></header>
 
 		<!-- Photo -->
-		<page class="container border align-items-center">
-			<div class="row align-items-center mb-0">
-				<div class="row">
-					<div class="col-md-8">
-						<img th:src="${photo.getImageUrl()}" class="img-fluid">
-					</div>
-					<div class="col-md-4">
-						<ul>
-							<li>
-								<a th:href="@{'/photo' + '/' + ${photo.getId()}}" th:text="${photo.getDescription()}">
-									Name of the photo
-								</a>
-							</li>
-							<li>
-								<a th:href="@{'/album' + '/' + ${photo.getAlbum().getId()}}"
-									th:text="${photo.getAlbum().getName()}">
-									Name of the album
-								</a>
-							</li>
-							<li>
-								<a th:href="@{'/photographer' + '/' + ${photo.getPhotographer().getId()}}"
-									th:text="${photo.getPhotographer().getName()} + ' ' + ${photo.getPhotographer().getSurname()}">
-									Name of the photographer
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div>
-						<form th:action="@{'/addToCart' + '/' +  ${photo.getId()}}" method="POST">
-							<button type="submit">Add to cart</button>
-						</form>
+		<div class="p-3">
+			<page class="container align-items-center">
+				<div class="row align-items-center mb-0">
+					<div class="row">
+						<div class="col-md-8">
+							<img th:src="${photo.getImageUrl()}" class="img-fluid">
+						</div>
+						<div class="col-md-4">
+							<ul>
+								<li>
+									<h4>Photo name:</h4>
+									<a th:href="@{'/photo' + '/' + ${photo.getId()}}"
+										th:text="${photo.getDescription()}">
+										Name of the photo
+									</a>
+								</li>
+								<li>
+									<h4>From album:</h4>
+									<a th:href="@{'/album' + '/' + ${photo.getAlbum().getId()}}"
+										th:text="${photo.getAlbum().getName()}">
+										Name of the album
+									</a>
+								</li>
+								<li>
+									<h4>By:</h4>
+									<a th:href="@{'/photographer' + '/' + ${photo.getPhotographer().getId()}}"
+										th:text="${photo.getPhotographer().getName()} + ' ' + ${photo.getPhotographer().getSurname()}">
+										Name of the photographer
+									</a>
+								</li>
+							</ul>
+							<div class="p-3 mt-5 text-center">
+								<form th:action="@{'/addToCart' + '/' +  ${photo.getId()}}" method="POST">
+									<button type="submit" class="btn-lg btn-success ">Add to cart</button>
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</page>
+			</page>
+		</div>
 		<div th:if="${cart.isNotEmpty()}">
-			<div class="footer">
+			<div class="footer container-fluid">
 				<div class="p-5">
 					<h3>Cart</h3>
 				</div>
-				<div th:each="p: ${cart.getPhotosAsList()}">
-					<div class="col-sm-4 col-md-3 col-lg-2">
+				<div class="row">
+					<div class="col-sm-4 col-md-3 col-lg-2" th:each="p: ${cart.getPhotosAsList()}">
 						<img th:src="${p.getImageUrl()}" class="img-thumbnail">
 					</div>
 				</div>
+				<a href="/cart" class="btn-success btn-lg p-2">Confirm cart</a>
 			</div>
 		</div>
 	</div>

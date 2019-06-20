@@ -42,16 +42,17 @@
 						browse photos from our vast collection.</p>
 					<!-- Search form -->
 					<div class="col-lg-8 mx-auto">
-						<div class="input-group">
+						<div class="container-fluid text-center">
 							<form th:object="${searchWrapper}" th:action="@{/search}" method="POST">
 								<input type="text" class="form-control" th:field="*{search}">
-								in <select th:field="*{type}">
-									<option th:value="${0}">All</option>
-									<option th:value="${1}">Photos</option>
-									<option th:value="${2}">Albums</option>
-									<option th:value="${3}">Photographers</option>
-								</select>
-								<button class="btn-info" type="submit"> Search </button>
+								<div class="text-white-50 p-3"> in <select th:field="*{type}">
+										<option th:value="${0}">Everything</option>
+										<option th:value="${1}">Photos</option>
+										<option th:value="${2}">Albums</option>
+										<option th:value="${3}">Photographers</option>
+									</select>
+									<button class="btn-info" type="submit"> Search </button>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -61,33 +62,37 @@
 	</header>
 
 	<!-- Photo -->
-	<div class="container photo-page">
-		<!-- <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Thumbnail Gallery</h1> -->
-		<!--  <hr class="mt-2 mb-5"> -->
+	<div class="container-fluid p-5">
 		<div th:if="${last30Photos.empty}">
 			<div class="col"> No Photos Available </div>
 		</div>
-		<div class="row text-center text-lg-center">
+		<div class="row centered">
 			<div th:each="photo: ${last30Photos}">
-				<span class="col-lg-3 col-md-4 col-sm-12">
+				<span class="col-lg-12 col-md-12 col-sm-12 p-2">
 					<a th:href="@{'/photo' + '/' + ${photo.id}}">
 						<img class="img-fluid img-thumbnail" th:src="${photo.getImageUrl()}">
 					</a>
-					<a th:href="@{'/photo' + '/' + ${photo.id}}" th:text="${photo.description}">description of the photo
-					</a>
-					<a th:href="@{'/photographer' + '/' + ${photo.getPhotographer().getId()}}"
-						th:text="${photo.getPhotographer().name} + ' ' + ${photo.getPhotographer().surname}">name of the
-						photographer
-					</a>
 				</span>
+				<div class="container p-5">
+					<h4>
+						<a th:href="@{'/photo' + '/' + ${photo.id}}" th:text="${photo.description}">description of the
+							photo
+						</a>
+						, taken by
+						<a th:href="@{'/photographer' + '/' + ${photo.getPhotographer().getId()}}"
+							th:text="${photo.getPhotographer().name} + ' ' + ${photo.getPhotographer().surname}">name of
+							the
+							photographer
+						</a></h4>
+				</div>
 			</div>
 		</div>
 		<div th:if="${cart.isNotEmpty()}">
-			<div class="footer">
+			<div class="footer container-fluid">
 				<div class="p-5">
 					<h3>Cart</h3>
 				</div>
-				<div >
+				<div class="row">
 					<div class="col-sm-4 col-md-3 col-lg-2" th:each="p: ${cart.getPhotosAsList()}">
 						<img th:src="${p.getImageUrl()}" class="img-thumbnail">
 					</div>
